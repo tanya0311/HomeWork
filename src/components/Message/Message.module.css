@@ -1,0 +1,62 @@
+
+.Message {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: black;
+    padding: 50px;
+    width: 500px;
+    margin: 500px auto;
+}
+
+.MessageImg img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    border: 1px solid beige;
+}
+
+
+.MessageText {
+    text-align: left;
+    padding: 10px 10px 5px;
+    width: 250px;
+    height: 100%;
+    background-color: beige;
+    border-radius: 10px;
+    position: relative;
+    margin-left: 30px;
+}
+
+.MessageText:before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 30px solid beige;
+    border-left: 30px solid transparent;
+}
+
+.userMessage{
+   margin: 5px;
+}
+.userName {
+    text-transform: capitalize;
+    font-size: 20px;
+}
+
+.userText {
+    font-size: 16px;
+    word-break: break-all;
+}
+
+.time {
+    font-size: 18px;
+    color: grey;
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    margin: 5px 0;
+}
