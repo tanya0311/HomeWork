@@ -15,14 +15,12 @@ function App() {
         {id: v1(), title: "video", p: "middle", isDone: true},
     ]);
 
-
     let [filter, setFilter] = useState<FilterValuesType>('all');
 
 
     function changeFilter(newFilterValues: FilterValuesType) {
         setFilter(newFilterValues);
     };
-
 
 
     let tasksForTodoList = tasks;
@@ -39,6 +37,14 @@ function App() {
         setTasks(filteredTasks);
     }
 
+    function ChangStatus(taskId: string, isDone: boolean) {
+        let task = tasks.find(t => t.id === taskId);
+        if (task) {
+            task.isDone = isDone;
+        }
+        setTasks([...tasks]);
+    }
+
 
     return (
         <div className="App">
@@ -47,7 +53,8 @@ function App() {
                 tasks={tasksForTodoList}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
-
+                ChangTaskStatus={ChangStatus}
+                filter={filter}
             />
 
             <Message name="Tatsiana" text="100% где-то могла накосячить, но буду стараться)" time="20:00"/>
