@@ -12,12 +12,12 @@ type InputPropsType = {
 
 
 
-export function Input(props: InputPropsType) {
+export const Input = (props: InputPropsType) => {
 
     let [error, setError] = useState<string | null>(null);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setError('');
+        setError(' ');
         props.setNewNames(e.currentTarget.value)
     };
 
@@ -42,13 +42,13 @@ export function Input(props: InputPropsType) {
 
     return (
         <div>
-            <input
-                    value={props.newNames}
-                    onChange={onChange}
-                    onKeyPress={onKeyPress}
-                    />
-                    <Button title={'+'} callbackFun={()=>{onErrorHelloNames}}/>
-                {error && <div className={classes.errorMessage}> {error}</div>}
+            <input className={props.newNames ? classes.universal : classes.error}
+                   value={props.newNames}
+                   onChange={onChange}
+                   onKeyPress={onKeyPress}
+            />
+            <Button title={'+'} callbackFun={()=>{onErrorHelloNames()}}/>
+            {error && <div className={classes.errormessage}> {error}</div>}
         </div>
 
     )

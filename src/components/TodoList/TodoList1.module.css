@@ -31,9 +31,6 @@ span {
 .btnTL button {
     margin-left: 20px;
 }
-.activeFilter {
-    background-color: aquamarine;
-}
 
 .isdone {
     opacity: 0.5;

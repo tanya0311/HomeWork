@@ -55,6 +55,7 @@ function App() {
                 changeFilter={changeFilter}
                 ChangTaskStatus={ChangStatus}
                 filter={filter}
+                // HelloNames={props.HelloNames}
             />
 
             <Message name="Tatsiana" text="100% где-то могла накосячить, но буду стараться)" time="20:00"/>

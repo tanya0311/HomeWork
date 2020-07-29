@@ -1,11 +1,11 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import classes from './TodoList1.module.css';
 import {v1} from "uuid";
 import {Input} from "../../common/input/Input";
 import {Button} from "../../common/button/Button";
 
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     p: string
@@ -29,17 +29,16 @@ export function Todolist(props: PropsType) {
     let [names, setNames] = useState([{id: v1(), name: ' Vasaya'}]);
     let [newNames, setNewNames] = useState(' ');
 
-    // let [error, setError] = useState<string | null>(null);
 
-
-    function HelloNames(setNewNames: string) {
+    function HelloNames(newNames: string) {
         //if (newNames.length >= 2) или
         if (newNames.trim() !== '') {
             alert('Hello' + newNames);
             addNames(newNames);
         }
+        // перенесла в  input
         // else {
-        //     setError('Field is required')
+        //    setError('Field is required')
         // }
         addNames(' ')
     }
@@ -50,51 +49,16 @@ export function Todolist(props: PropsType) {
         console.log(newNames.length + names.length);
     }
 
-    const onButtonNames = () => {
-        HelloNames(newNames);
-        setNewNames(' ');
-    }
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewNames(e.currentTarget.value)
-    }
-
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        // setError(null);
-        if (e.charCode === 13) {
-            HelloNames(newNames);
-            setNewNames(' ')
-        }
-    }
-    //
-    // const onAllClickHandler = () => {
-    //     props.changeFilter('all')
-    // }
-    //
-    // const onImportantClickHandler = () => {
-    //     props.changeFilter('important')
-    // }
-    // const onCompletedClickHandler = () => {
-    //     props.changeFilter('completed')
-    // }
-
 
     return <div className={classes.TodoList}>
         <br/>
 
-        <input type="text"
-               value={newNames}
-               onChange={onChangeHandler}
-               onKeyPress={onKeyPressHandler}
-            // className={error ? 'error' : ' '}
-        />
-
-        <button onClick={onButtonNames}>+</button>
-        {/*<Input newNames={newNames} setNewNames={setNewNames} HelloNames={HelloNames}/>*/}
+        <Input newNames={newNames} setNewNames={setNewNames} HelloNames={HelloNames}/>
 
         <p>The number of objects in the array: {names.length}</p>
         <br/>
-
         <h1>{props.title}</h1>
+
         <ol>
             {
                 props.tasks.map((t) => {
@@ -111,7 +75,9 @@ export function Todolist(props: PropsType) {
                         {/*        onClick={onRemoveHandler}> delete*/}
                         {/*</button>*/}
                         <Button title={'delete'}
-                                callbackFun={() => {props.removeTask(t.id)}}/>
+                                callbackFun={() => {
+                                    props.removeTask(t.id)
+                                }}/>
                     </li>
                 })
             }
@@ -119,22 +85,22 @@ export function Todolist(props: PropsType) {
         <div className={classes.btnTL}>
 
             <Button title={'all'}
-                    callbackFun={() => {props.changeFilter('all')}}/>
-            <Button title={'important'}
-                    callbackFun={() => {props.changeFilter('important')}}/>
+                    callbackFun={() => {
+                        props.changeFilter('all')
+                    }}/>
+            <Button
+                title={'important'}
+                callbackFun={() => {
+                    props.changeFilter('important')
+                }}
+            />
             <Button title={'completed'}
-                    callbackFun={() => {props.changeFilter('completed')}}/>
+                    callbackFun={() => {
+                        props.changeFilter('completed')
+                    }}/>
 
 
-            {/*<button onClick={onAllClickHandler}*/}
-            {/*        className={props.filter === 'all' ? classes.activeFilter : ' '}>All*/}
-            {/*</button>*/}
-            {/*<button onClick={onImportantClickHandler}*/}
-            {/*        className={props.filter === 'important' ? classes.activeFilter : ' '}>Important*/}
-            {/*</button>*/}
-            {/*<button onClick={onCompletedClickHandler}*/}
-            {/*        className={props.filter === 'completed' ? classes.activeFilter : ' '}>Completed*/}
-            {/*</button>*/}
         </div>
     </div>
 }
+
